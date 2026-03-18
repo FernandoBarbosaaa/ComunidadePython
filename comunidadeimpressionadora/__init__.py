@@ -13,8 +13,9 @@ app = Flask(__name__,
 
 
 app.config['SECRET_KEY'] = 'ae9f09640c0a2789b02ac3b49f54729c'
+
 if os.getenv("DATABASE_URL"):
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///comunudade.db'
 
