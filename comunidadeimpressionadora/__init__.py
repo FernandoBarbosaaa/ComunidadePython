@@ -3,6 +3,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+import os
 
 # Pasta do pacote (onde estão static/ e templates/)
 pasta_pacote = os.path.dirname(os.path.abspath(__file__))
@@ -12,7 +13,10 @@ app = Flask(__name__,
 
 
 app.config['SECRET_KEY'] = 'ae9f09640c0a2789b02ac3b49f54729c'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///comunudade.db'
+if os.getenv("DATABASE_URL"):
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:wzUvGpjHplYZKRuEFHlRnpQEpdxPqkzi@shortline.proxy.rlwy.net:44962/railway'
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///comunudade.db'
 
 database = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
