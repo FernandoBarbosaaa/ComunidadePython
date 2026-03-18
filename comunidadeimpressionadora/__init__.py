@@ -5,7 +5,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 import os
 import sqlalchemy
-from comunidadeimpressionadora.models import Usuario, Post
+
 
 # Pasta do pacote (onde estão static/ e templates/)
 pasta_pacote = os.path.dirname(os.path.abspath(__file__))
@@ -27,6 +27,9 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message = 'Faça login para acessar esta página.'
 login_manager.login_message_category = 'alert-primary'
+
+# Cria o Banco de Dados caso não tenha
+from comunidadeimpressionadora import models
 
 engine = sqlalchemy.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 inspector = sqlalchemy.inspect(engine)
